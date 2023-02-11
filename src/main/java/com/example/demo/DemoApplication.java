@@ -13,8 +13,4 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@RequestMapping("/")
-	String sayHello() {
-		return "Hello World! This is a test upload";
-	}
 }
