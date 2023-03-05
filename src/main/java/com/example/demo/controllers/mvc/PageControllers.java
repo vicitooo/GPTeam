@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageControllers {
 
     @RequestMapping("/chat")
-    public String index() {
+    public String chat() {
+        return "chat";
+    }
+
+    @RequestMapping("/")
+    public String home() {
         return "home";
     }
 
