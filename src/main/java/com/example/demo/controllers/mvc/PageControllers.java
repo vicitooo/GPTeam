@@ -13,7 +13,12 @@ public class PageControllers {
 
     @RequestMapping("/")
     public String home() {
-        return "home";
+        return "landingpage/landingpage";
+    }
+
+    @RequestMapping("/home")
+    public String homepage() {
+        return "landingpage/landingpage";
     }
 
     @RequestMapping("/vision")
