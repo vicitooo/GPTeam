@@ -21,4 +21,9 @@ public class AgentsController {
     public String designer() {
         return "agents/ProductDesigner";
     }
+
+    @RequestMapping("/Socrates.html")
+    public String socrates() {
+        return "agents/Socrates";
+    }
 }
