@@ -199,18 +199,25 @@
 		}else {
   // Collect all messages in one string
   let allMessages = '';
+  let message = chatInput.value;
+  appendMessage('user', message);
   const chatMessages = chatWindow.querySelectorAll('.chat-message');
   chatMessages.forEach(function(chatMessage) {
     const messageText = chatMessage.querySelector('p').textContent;
     allMessages += messageText + '\n';
+	// if chat is from bot append bot message
+	if (chatMessage.classList.contains('bot-message')) {
+	  allMessages += 'Socrates: ';
+	} else{
+	  allMessages += 'User: ';}
   });
+  console.log('All messages variable: ')
   console.log(allMessages);
   
   event.preventDefault();
-  const message = chatInput.value;
-  if (message.trim() === '') return;
-  appendMessage('user', message);
-  
+
+  message = allMessages;
+  console.log('Sending message: ' + message)
   const response = await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/philosopher/socrates', {
     method: 'POST',
     headers: {
@@ -234,7 +241,7 @@
 }});
 	
 		function appendMessage(sender, message) {
-			console.log(`Message received: ${message}`);
+			// console.log(`Message received: ${message}`);
 			const messageDiv = document.createElement('div');
 			messageDiv.classList.add('chat-message');
 			messageDiv.innerHTML = `
