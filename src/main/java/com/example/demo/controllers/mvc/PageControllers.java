@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageControllers {
 
-    @RequestMapping("/")
+    @RequestMapping("/chat")
     public String index() {
         return "home";
     }
