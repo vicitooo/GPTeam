@@ -199,17 +199,29 @@
 		}else {
   // Collect all messages in one string
   let allMessages = '';
+  let message = chatInput.value;
+  appendMessage('user', message);
   const chatMessages = chatWindow.querySelectorAll('.chat-message');
-  chatMessages.forEach(function(chatMessage) {
-    const messageText = chatMessage.querySelector('p').textContent;
-    allMessages += messageText + '\n';
-  });
+  chatMessages.forEach(function(chatMessage, index) {
+  const messageText = chatMessage.querySelector('p').textContent;
+  let sender = '';
+  const childDiv = chatMessage.querySelector('div');
+  if (childDiv.classList.contains('bot-message')) {
+    sender = index === 0 ? '' : '';
+  } else if (childDiv.classList.contains('user-message')) {
+    sender = 'User';
+  }
+  allMessages += `${sender}: ${messageText}\n`;
+});
+
+
+  console.log('All messages variable: ')
   console.log(allMessages);
   
   event.preventDefault();
-  const message = chatInput.value;
-  if (message.trim() === '') return;
-  appendMessage('user', message);
+
+  message = allMessages;
+  console.log('Sending message: ' + message)
   
   const response = await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/marketing/emilbauer', {
     method: 'POST',

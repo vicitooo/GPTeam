@@ -202,15 +202,19 @@
   let message = chatInput.value;
   appendMessage('user', message);
   const chatMessages = chatWindow.querySelectorAll('.chat-message');
-  chatMessages.forEach(function(chatMessage) {
-    const messageText = chatMessage.querySelector('p').textContent;
-    allMessages += messageText + '\n';
-	// if chat is from bot append bot message
-	if (chatMessage.classList.contains('bot-message')) {
-	  allMessages += 'Socrates: ';
-	} else{
-	  allMessages += 'User: ';}
-  });
+  chatMessages.forEach(function(chatMessage, index) {
+  const messageText = chatMessage.querySelector('p').textContent;
+  let sender = '';
+  const childDiv = chatMessage.querySelector('div');
+  if (childDiv.classList.contains('bot-message')) {
+    sender = index === 0 ? '' : '';
+  } else if (childDiv.classList.contains('user-message')) {
+    sender = 'User';
+  }
+  allMessages += `${sender}: ${messageText}\n`;
+});
+
+
   console.log('All messages variable: ')
   console.log(allMessages);
   
