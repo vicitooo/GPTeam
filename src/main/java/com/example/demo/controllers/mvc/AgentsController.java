@@ -26,4 +26,9 @@ public class AgentsController {
     public String socrates() {
         return "agents/Socrates";
     }
+
+    @RequestMapping("/Jailbreak.html")
+    public String jailbreak() {
+        return "agents/Jailbreak";
+    }
 }
