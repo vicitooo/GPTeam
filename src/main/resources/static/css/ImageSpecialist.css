@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #008080;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  #generated-image {
+    margin-top: 20px;
+  }
+  
