@@ -31,4 +31,9 @@ public class AgentsController {
     public String jailbreak() {
         return "agents/Jailbreak";
     }
+
+    @RequestMapping("/audio.html")
+    public String record() {
+        return "agents/Recording";
+    }
 }

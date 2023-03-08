@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
       audioBlob = event.data;
       // Save the audio file URL for playback
       audioURL = URL.createObjectURL(audioBlob);
+      console.log('Audio URL:', audioURL);
     };
     isRecording = false;
     recordBtn.textContent = "Start Recording";
