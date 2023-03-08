@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #008CBA;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #00587a;
+  }
+  
+  #start-btn {
+    background-color: #4CAF50;
+  }
+  
+  #start-btn:hover {
+    background-color: #357a38;
+  }
+  
+  #stop-btn {
+    background-color: #f44336;
+  }
+  
+  #stop-btn:hover {
+    background-color: #ba2525;
+  }
+  
+  input[type="hidden"] {
+    margin-top: 20px;
+  }
+  
