@@ -3,7 +3,7 @@
 
 <head>
 	<title>OpenAI Chatbot</title>
-	<link rel="stylesheet" type="text/css" href="../../static/css/ImageSpecialist.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="../../static/css/ImageSpecialist.css" /> -->
 	<link rel="stylesheet" type="text/css" href="/css/ImageSpecialist.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -43,7 +43,7 @@
 				</div>
 			</div>
 			<!-- End of specialist fields -->
-		
+
 			<!-- Profile photo that floats in the top right corner on the same line as openAI chatbot -->
 			<div class="profile-photo"></div>
 
@@ -67,100 +67,40 @@
 		</div>
 
 		<script>
-
 			const chatWindow = document.getElementById('chat-window');
 			const chatInput = document.getElementById('chat-input');
 			const chatSubmit = document.getElementById('chat-submit');
 			const chatForm = document.getElementById('chat-form');
 
-			counter = 0;
+			let counter = 0;
 
 			chatForm.addEventListener('submit', async function (event) {
-				if (counter == 0) {
-					counter = 1;
-					event.preventDefault();
-					const message = chatInput.value;
-					if (message.trim() === '') return;
-					appendMessage('user', message);
+				event.preventDefault();
+				const message = chatInput.value;
+				if (message.trim() === '') return;
+				appendMessage('user', message);
 
-					const response = await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/philosopher/socrates', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'Accept': 'application/json',
-							'Content-Type': 'application/json',
-							'Access-Control-Allow-Origin': '*'
-						},
-						body: JSON.stringify({ message })
-					});
+				const response = await sendChatMessage(message, counter);
 
-					if (!response.ok) {
-						console.error(`Error: ${response.status} - ${response.statusText}`);
-						return;
-					}
-
-					const data = await response.json();
-					console.log(data);
-					appendMessage('bot', data.content);
-					chatInput.value = '';
-				} else {
-					// Collect all messages in one string
-					let allMessages = '';
-					let message = chatInput.value;
-					appendMessage('user', message);
-					const chatMessages = chatWindow.querySelectorAll('.chat-message');
-					chatMessages.forEach(function (chatMessage, index) {
-						const messageText = chatMessage.querySelector('p').textContent;
-						let sender = '';
-						const childDiv = chatMessage.querySelector('div');
-						if (childDiv.classList.contains('bot-message')) {
-							sender = index === 0 ? '' : '';
-						} else if (childDiv.classList.contains('user-message')) {
-							sender = 'User';
-						}
-						allMessages += `${sender}: ${messageText}\n`;
-					});
-
-
-					console.log('All messages variable: ')
-					console.log(allMessages);
-
-					event.preventDefault();
-
-					message = allMessages;
-					console.log('Sending message: ' + message)
-					const response = await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/philosopher/socrates', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'Accept': 'application/json',
-							'Content-Type': 'application/json',
-							'Access-Control-Allow-Origin': '*'
-						},
-						body: JSON.stringify({ message })
-					});
-
-					if (!response.ok) {
-						console.error(`Error: ${response.status} - ${response.statusText}`);
-						return;
-					}
-
-					const data = await response.json();
-					console.log(data);
-					appendMessage('bot', data.content);
-					chatInput.value = '';
+				if (!response.ok) {
+					console.error(`Error: ${response.status} - ${response.statusText}`);
+					return;
 				}
+
+				const data = await response.json();
+				console.log(data);
+				appendMessage('bot', data.content);
+				chatInput.value = '';
+				counter++;
 			});
 
 			function appendMessage(sender, message) {
-				// console.log(`Message received: ${message}`);
 				const messageDiv = document.createElement('div');
 				messageDiv.classList.add('chat-message');
 				messageDiv.innerHTML = `
-				<div class="${sender}-message">
-					<p>${message}</p>
-				</div>
-			`;
+  				 <div class="${sender}-message">
+  				     <p>${message}</p>
+  				 </div>`;
 				chatWindow.appendChild(messageDiv);
 				chatWindow.scrollTop = chatWindow.scrollHeight;
 			}
@@ -176,9 +116,46 @@
 
 			autoResize.call(textarea);
 
+			async function sendChatMessage(message, counter) {
+				let requestBody = {};
+
+				if (counter === 0) {
+					requestBody = { message };
+				} else {
+					let allMessages = '';
+					const chatMessages = chatWindow.querySelectorAll('.chat-message');
+					chatMessages.forEach(function (chatMessage, index) {
+						const messageText = chatMessage.querySelector('p').textContent;
+						let sender = '';
+						const childDiv = chatMessage.querySelector('div');
+						if (childDiv.classList.contains('bot-message')) {
+							sender = index === 0 ? '' : '';
+						} else if (childDiv.classList.contains('user-message')) {
+							sender = 'User';
+						}
+						allMessages += `${sender}: ${messageText}\n`;
+					});
+
+					requestBody = { message: allMessages };
+				}
+
+				return await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/philosopher/socrates', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+						'Access-Control-Allow-Origin': '*'
+					},
+					body: JSON.stringify(requestBody)
+				});
+			}
+
 
 		</script>
-		<script src="../../static/js/googleSpeechForAgents.js"></script>
+		<!-- <script src="../../static/js/googleSpeechForAgents.js"></script> -->
+		<script src="/js/googleSpeechForAgents.js"></script>
+
 
 
 </body>
