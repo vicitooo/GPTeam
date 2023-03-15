@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Send GET Request to Firebase Function</title>
+</head>
+<body>
+  <div id="output"></div>
+  <button id="fetch-button">Fetch Data</button>
+  <script>
+    const url = 'https://us-central1-api-project-1058745121639.cloudfunctions.net/testing/test'; // Replace with your function endpoint URL
+    const output = document.getElementById('output');
+    const fetchButton = document.getElementById('fetch-button');
+    fetchButton.addEventListener('click', () => {
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          // Display the data on the HTML page
+          output.innerHTML = `
+            <p>First Name: ${data.first_name}</p>
+            <p>Last Name: ${data.last_name}</p>
+            <p>ID: ${data.id}</p>
+            <p>Address: ${data.adress[0].city}</p>
+          `;
+        })
+        .catch(error => console.error(error));
+    });
+  </script>
+</body>
+</html>

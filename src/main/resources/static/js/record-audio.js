@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Get the HTML elements
   const recordBtn = document.querySelector("#record-btn");
   const playBtn = document.querySelector("#play-btn");
@@ -71,12 +71,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Send the audio file to the back-end URL for transcription
+  
     const formData = new FormData();
     formData.append('audioFile', audioBlob);
+    console.log("FormData:", formData.get('audioFile'));
+    console.log("AudioFile:", audioBlob);
 
-    const response = await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/audio/transcribe', {
+    const response = await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/transcribeAudio/audio', {
       method: 'POST',
-      body: formData
+      body: formData,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'multipart/form-data'
+      }
     });
 
     const transcriptionResult = await response.json();
