@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Audio</title>
+  </head>
+  <body>
+    <h1>Upload Audio File</h1>
+    <form enctype="multipart/form-data">
+      <input type="file" id="audioFile" accept="audio/mp3, audio/wav" />
+      <button type="button" onclick="uploadAudio()">Upload</button>
+    </form>
+    <script>
+      async function uploadAudio() {
+        const fileInput = document.getElementById('audioFile');
+        const file = fileInput.files[0];
+
+        if (!file) {
+          alert('No file selected.');
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('audioFile', file);
+
+        try {
+          const response = await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/transcribeAudio/audio', {
+            method: 'POST',
+            body: formData,
+            "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+          });
+
+          if (!response.ok) {
+            throw new Error(await response.text());
+          }
+
+          const result = await response.json();
+          alert(`File uploaded: ${result.fileName}\nFormat: ${result.format}`);
+        } catch (error) {
+          alert(`Error: ${error.message}`);
+        }
+      }
+    </script>
+  </body>
+</html>

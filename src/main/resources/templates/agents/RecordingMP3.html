@@ -10,9 +10,12 @@
       <button type="button" id="record-btn">Start Recording</button>
       <button type="button" id="play-btn">Play Recording</button>
       <button type="button" id="transcribe-btn">Transcribe</button>
+      <a id="download-btn" style="display:none">Download MP3</a>
       <input type="hidden" id="audio-input" name="audio-input">
       <p id="timer">00:00</p>
     </form>
-    <script src="../../static/js/record-audio.js"></script>
+    <script src="../../static/js/record-audioMP3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.0/lame.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </body>
 </html>
