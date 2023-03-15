@@ -36,11 +36,13 @@ body {
   border-radius: 5px;
   text-align: right;
 }
+
 .chat-input {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
 }
+
 .chat-input input[type="text"] {
   flex: 1;
   padding: 10px;
@@ -48,7 +50,21 @@ body {
   border: none;
   font-size: 16px;
   margin-right: 10px;
+  box-sizing: border-box;
+  resize: none;
+  overflow: hidden;
 }
+
+.chat-input input[type="text"]::placeholder {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-input input[type="text"]:focus {
+  outline: none;
+}
+
 .chat-input button {
   padding: 10px;
   background-color: #4CAF50;
@@ -58,6 +74,29 @@ body {
   cursor: pointer;
   font-size: 16px;
 }
+
+.auto-height {
+  min-height: 30px;
+  max-height: 200px;
+  overflow-y: auto;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.chat-input textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  margin-right: 10px;
+  box-sizing: border-box;
+  resize: none;
+  overflow: hidden;
+  width: 80%;
+}
+
+
+
 
 /* New CSS for specialist fields */
 .specialist-fields {
@@ -89,4 +128,13 @@ font-size: 12px;
 border-radius: 3px;
 border: none;
 box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.mic-icon {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.recording {
+  color: red;
 }

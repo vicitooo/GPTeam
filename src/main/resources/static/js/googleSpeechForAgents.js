@@ -1,25 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
     const micIcon = document.getElementById('mic-icon');
-    const chatInput = document.getElementById('transcript');
+    const chatInput = document.getElementById('chat-input');
     let isRecording = false;
     let currentTranscript = '';
     let sentences = [];
-    
+
     function startNewConversation() {
         currentTranscript = '';
         sentences = [];
     }
-    
-    // Check if the browser supports SpeechRecognition
+
     if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         const recognition = new SpeechRecognition();
-    
+
         recognition.lang = 'en-US';
         recognition.interimResults = true;
         recognition.maxAlternatives = 1;
         recognition.continuous = true;
-    
+
         micIcon.addEventListener('click', () => {
             if (!isRecording) {
                 recognition.start();
@@ -28,23 +27,23 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             isRecording = !isRecording;
         });
-    
+
         recognition.addEventListener('start', () => {
             micIcon.classList.add('recording');
-            startNewConversation(); // Clear previous text when starting a new conversation
+            startNewConversation();
         });
-    
+
         recognition.addEventListener('end', () => {
             micIcon.classList.remove('recording');
             if (isRecording) {
                 recognition.start();
             }
         });
-    
+
         recognition.addEventListener('result', (event) => {
             let interimResult = '';
             let finalResult = '';
-    
+
             for (let i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     finalResult += event.results[i][0].transcript;
@@ -53,17 +52,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     interimResult += event.results[i][0].transcript;
                 }
             }
-    
-            chatInput.textContent = currentTranscript + ' ' + sentences.join('. ') + (interimResult ? ' ' + interimResult : '');
+
+            chatInput.value = currentTranscript + ' ' + sentences.join('. ') + (interimResult ? ' ' + interimResult : '');
+            autoResize.call(chatInput);
         });
-    
+
         recognition.addEventListener('error', (event) => {
             console.error('Error occurred in recognition:', event.error);
         });
     } else {
         micIcon.style.display = 'none';
-        chatInput.textContent = 'Your browser does not support SpeechRecognition.';
+        chatInput.placeholder = 'Your browser does not support SpeechRecognition.';
     }
-    
+
+
 });
 
