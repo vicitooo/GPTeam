@@ -4,29 +4,20 @@
 <head>
 	<title>OpenAI Chatbot</title>
 	<link rel="stylesheet" type="text/css" href="../../static/css/ImageSpecialist.css" />
+	<link rel="stylesheet" type="text/css" href="/css/ImageSpecialist.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 	<style>
 		/* Profile photo that floats top right*/
 		.profile-photo {
-			width: 100px;
-			height: 100px;
 			background-image: url('https://cdn.discordapp.com/attachments/1079527046398607520/1081941796822720663/metamoji3_Real-Life_Photo_of_Socrates_6cae9947-e1fc-443e-897d-027bf021cf84.png');
-			background-size: cover;
-			background-position: center;
-			border-radius: 50%;
-			margin-right: 10px;
-			flex-shrink: 0;
 		}
 	</style>
 </head>
 
 <body>
 	<div class="container">
-		<!-- Profile photo that floats in the top right corner on the same line as openAI chatbot -->
-		<div class="profile-photo"></div>
-		<!-- New HTML code for specialist fields -->
-		<div class="specialist-fields">
+		<div class="container">
 			<!-- New HTML code for specialist fields -->
 			<div class="specialist-fields">
 				<h2>Specialist Information</h2>
@@ -51,7 +42,10 @@
 					<span class="specialist-value"> Existential Thinking</span>
 				</div>
 			</div>
-
+			<!-- End of specialist fields -->
+		
+			<!-- Profile photo that floats in the top right corner on the same line as openAI chatbot -->
+			<div class="profile-photo"></div>
 
 			<div class="chat-window" id="chat-window">
 				<div class="chat-message">
