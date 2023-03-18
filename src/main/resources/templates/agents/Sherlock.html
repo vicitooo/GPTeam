@@ -5,12 +5,15 @@
 	<title>OpenAI Chatbot</title>
 	<link rel="stylesheet" type="text/css" href="../../static/css/ImageSpecialist.css" />
 	<!-- <link rel="stylesheet" type="text/css" href="/css/ImageSpecialist.css" /> -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<script src="../../static/js/googleSpeechForAgents.js"></script>
+	<!-- <script src="/js/googleSpeechForAgents.js"></script> -->
 
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<style>
 		/* Profile photo that floats top right*/
 		.profile-photo {
-			background-image: url('https://cdn.discordapp.com/attachments/1079527046398607520/1081941796822720663/metamoji3_Real-Life_Photo_of_Socrates_6cae9947-e1fc-443e-897d-027bf021cf84.png');
+			background-image: url('https://th.bing.com/th/id/R.a7bac897743494088a6cc57146d133fa?rik=wQGfHh%2bnxJ0R7w&pid=ImgRaw&r=0');
 		}
 	</style>
 </head>
@@ -23,15 +26,15 @@
 				<h2>Specialist Information</h2>
 				<div class="specialist-row">
 					<span class="specialist-label">Name:</span>
-					<span class="specialist-value"> Socrates</span>
+					<span class="specialist-value"> Sherlock Holmes</span>
 				</div>
 				<div class="specialist-row">
 					<span class="specialist-label">Fields:</span>
-					<span class="specialist-value"> Philosopher </span>
+					<span class="specialist-value">  </span>
 				</div>
 				<div class="specialist-row">
 					<span class="specialist-label">Experience:</span>
-					<span class="specialist-value"> 2493 Years</span>
+					<span class="specialist-value">  </span>
 				</div>
 				<div class="specialist-row">
 					<span class="specialist-label">Availability:</span>
@@ -39,7 +42,7 @@
 				</div>
 				<div class="specialist-row">
 					<span class="specialist-label">Speciality:</span>
-					<span class="specialist-value"> Existential Thinking</span>
+					<span class="specialist-value">  </span>
 				</div>
 			</div>
 			<!-- End of specialist fields -->
@@ -50,7 +53,7 @@
 			<div class="chat-window" id="chat-window">
 				<div class="chat-message">
 					<div class="bot-message">
-						<p>Hello, dear friend. My name is Socrates. How can I help you? </p>
+						<p></p>
 					</div>
 				</div>
 			</div>
@@ -129,7 +132,7 @@
 						let sender = '';
 						const childDiv = chatMessage.querySelector('div');
 						if (childDiv.classList.contains('bot-message')) {
-							sender = index === 0 ? '' : '';
+							sender = index === 0 ? 'Sherlock' : 'Sherlock';
 						} else if (childDiv.classList.contains('user-message')) {
 							sender = 'User';
 						}
@@ -139,7 +142,9 @@
 					requestBody = { message: allMessages };
 				}
 
-				return await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/special/socrates', {
+
+				console.log(requestBody);
+				return await fetch('https://us-central1-api-project-1058745121639.cloudfunctions.net/special/sherlock2', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
@@ -153,8 +158,7 @@
 
 
 		</script>
-		<script src="../../static/js/googleSpeechForAgents.js"></script>
-		<!-- <script src="/js/googleSpeechForAgents.js"></script> -->
+
 
 
 
